@@ -8,5 +8,6 @@ int main(){
     obj1.displayarray1();
     cout<<endl<<"String Array: "<<'\n';
     obj2.displayarray1();
+    std::cout<<endl;
     return 0;
 }
