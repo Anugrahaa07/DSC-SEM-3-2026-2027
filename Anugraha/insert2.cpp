@@ -18,7 +18,7 @@ int main(){
     cin>>ub;
     cout<<"Enter which number you want to insert: "<<'\n';
     cin>>val;
-    for(int i=lb;i<=ub;i--){
+    for(int i=lb;i<=ub;i++){
         a[i+1]=a[i];
     }
     a[lb]=val;
