@@ -19,12 +19,13 @@ int main(){
     for(int i=lb+1;i<=ub;i++){
         key=a[i];
         j=i-1;
-        while(j>=lb && a[j]>key){
-                a[j+1]=a[j];
+        while (j>=lb && a[j]>key){
+            a[j+1]=a[j];
+            j--;
         }
+        a[j+1]=key;  
     }
-    a[j+1]=key;
-    for(int i=0;i<ub;i++){
+    for(int i=0;i<=ub;i++){
         cout<<a[i]<<" ";
     }
     return 0;
