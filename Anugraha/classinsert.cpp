@@ -3,7 +3,8 @@ using namespace std;
 template<class T>
 class ReadData{
     public:
-    T ub,a[100],n,j,lb,key;
+    T a[100],key;
+    int ub,n,j,lb;
     void readData();
     void InsertData();
 };
@@ -41,7 +42,8 @@ void ReadData<T>::InsertData(){
 }
 int main(){
 ReadData<int>obj1;
-obj1.readData();
-obj1.InsertData();
+ReadData<double>obj2;
+obj2.readData();
+obj2.InsertData();
 return 0;
 }
