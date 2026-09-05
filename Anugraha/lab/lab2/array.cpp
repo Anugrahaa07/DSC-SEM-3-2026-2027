@@ -28,8 +28,6 @@ void array<T>::display()
         cout << a[i] << " ";
     cout << endl;
 }
-
-// 1. Bubble Sort
 template <class T>
 void array<T>::bubbleSort()
 {
@@ -46,8 +44,6 @@ void array<T>::bubbleSort()
         }
     }
 }
-
-// 2. Insertion Sort
 template <class T>
 void array<T>::insertionSort()
 {
@@ -63,26 +59,22 @@ void array<T>::insertionSort()
         a[j + 1] = key;
     }
 }
-
-// 3. Selection Sort
 template <class T>
 void array<T>::selectionSort()
 {
     for (int i = lb; i < ub; i++)
     {
-        int minIdx = i;
+        int min = i;
         for (int j = i + 1; j <= ub; j++)
         {
-            if (a[j] < a[minIdx])
+            if (a[j] < a[min])
                 minIdx = j;
         }
         T temp = a[i];
-        a[i] = a[minIdx];
-        a[minIdx] = temp;
+        a[i] = a[min];
+        a[min] = temp;
     }
 }
-
-// 4. Merge Sort
 template <class T>
 void array<T>::merge(int low, int mid, int high)
 {
@@ -120,8 +112,6 @@ void array<T>::mergeSort()
 {
     mergeSortHelper(lb, ub);
 }
-
-// 5. Quick Sort (Lomuto Partition)
 template <class T>
 int array<T>::partition(int low, int high)
 {
