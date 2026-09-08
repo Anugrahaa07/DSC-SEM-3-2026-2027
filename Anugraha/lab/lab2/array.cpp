@@ -8,10 +8,12 @@ array<T>::array()
 }
 
 template <class T>
-void array<T>::setLB(int x) { lb = x; }
+void array<T>::setlb(int a) { 
+    lb = a; }
 
 template <class T>
-void array<T>::setUB(int x) { ub = x; }
+void array<T>::setub(int a) { 
+    ub = a; }
 
 template <class T>
 void array<T>::create()
@@ -68,7 +70,7 @@ void array<T>::selectionSort()
         for (int j = i + 1; j <= ub; j++)
         {
             if (a[j] < a[min])
-                minIdx = j;
+                min = j;
         }
         T temp = a[i];
         a[i] = a[min];
@@ -96,13 +98,13 @@ void array<T>::merge(int low, int mid, int high)
 }
 
 template <class T>
-void array<T>::mergeSortHelper(int low, int high)
+void array<T>::MergeSort(int low, int high)
 {
     if (low < high)
     {
         int mid = (low + high) / 2;
-        mergeSortHelper(low, mid);
-        mergeSortHelper(mid + 1, high);
+        MergeSort(low, mid);
+        MergeSort(mid + 1, high);
         merge(low, mid, high);
     }
 }
@@ -110,7 +112,7 @@ void array<T>::mergeSortHelper(int low, int high)
 template <class T>
 void array<T>::mergeSort()
 {
-    mergeSortHelper(lb, ub);
+    MergeSort(lb, ub);
 }
 template <class T>
 int array<T>::partition(int low, int high)
@@ -136,18 +138,18 @@ int array<T>::partition(int low, int high)
 }
 
 template <class T>
-void array<T>::quickSortHelper(int low, int high)
+void array<T>::quickSort(int low, int high)
 {
     if (low < high)
     {
         int p = partition(low, high);
-        quickSortHelper(low, p - 1);
-        quickSortHelper(p + 1, high);
+        quickSort(low, p - 1);
+        quickSort(p + 1, high);
     }
 }
 
 template <class T>
-void array<T>::quickSort()
+void array<T>::QuickSort()
 {
-    quickSortHelper(lb, ub);
+    quickSort(lb, ub);
 }
