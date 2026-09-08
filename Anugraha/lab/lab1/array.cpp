@@ -1,24 +1,24 @@
 #include "array.h"
 template <class T>
-void array<T>::setLB(int x)
+void array<T>::setlb(int a)
 {
-    lb = x;
+    lb = a;
 }
  
 template <class T>
-void array<T>::setUB(int x)
+void array<T>::setub(int a)
 {
-    ub = x;
+    ub = a;
 }
  
 template <class T>
-int array<T>::getLB()
+int array<T>::getlb()
 {
     return lb;
 }
  
 template <class T>
-int array<T>::getUB()
+int array<T>::getub()
 {
     return ub;
 }
@@ -34,29 +34,29 @@ template <class T>
 void array<T>::create()
 {
     int i;
-    cout << "enter the elements";
+    cout << "enter the elements: ";
     for (i = lb; i <= ub; i++)
         cin >> a[i];
 }
 template <class T>
-void array<T>::insert_at_beginning(T key)
+void array<T>::insertatbeginning(T item)
 {
     for (int i = ub; i >= lb; i--)
     {
         a[i + 1] = a[i];
     }
-    a[lb] = key;
+    a[lb] = item;
     ub = ub + 1;
 }
 template <class T>
-void array<T>::insert_at_end(T key)
+void array<T>::insertatend(T item)
 {
     int pos = ub + 1;
-    a[pos] = key;
+    a[pos] = item;
     ub = ub + 1;
 }
 template <class T>
-void array<T>::insert_at_position(int p, T key)
+void array<T>::insertatposition(int p, T item)
 {
     if (p > ub || p < lb)
     {
@@ -68,16 +68,16 @@ void array<T>::insert_at_position(int p, T key)
     {
         a[i + 1] = a[i];
     }
-    a[p] = key;
+    a[p] = item;
     ub = ub + 1;
 }
 template <class T>
-void array<T>::delete_at_end()
+void array<T>::deleteatend()
 {
     ub = ub - 1;
 }
 template <class T>
-void array<T>::delete_at_beginning()
+void array<T>::deleteatbeginning()
 {
     for (int i = lb; i <= ub - 1; i++)
     {
@@ -86,7 +86,7 @@ void array<T>::delete_at_beginning()
     ub = ub - 1;
 }
 template <class T>
-void array<T>::delete_at_position(int p)
+void array<T>::deleteatposition(int p)
 {
     if (p > ub || p < lb)
     {

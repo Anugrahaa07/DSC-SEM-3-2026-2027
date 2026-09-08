@@ -13,16 +13,16 @@ class array
  
     public:
     array();                              
-    void setLB(int x);                   
-    void setUB(int x);                    
-    int  getLB();                         
-    int  getUB();                         
+    void setlb(int a);                   
+    void setub(int a);                    
+    int  getlb();                         
+    int  getub();                         
     void create();                        
-    void insert_at_end(T key);            
-    void insert_at_beginning(T key);      
-    void insert_at_position(int, T key);  
-    void delete_at_end();                 
-    void delete_at_beginning();           
-    void delete_at_position(int);         
+    void insertatend(T item);            
+    void insertatbeginning(T item);      
+    void insertatposition(int, T item);  
+    void deleteatend();                 
+    void deleteatbeginning();           
+    void deleteatposition(int);         
     template<class U> friend ostream& operator<<(ostream&, const array<U>&);
 };

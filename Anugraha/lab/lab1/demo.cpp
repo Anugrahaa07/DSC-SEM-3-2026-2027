@@ -4,83 +4,83 @@ int main()
 {
     char repeat;
     int choice;
-    int pos, ele, l, u;
+    int pos, element, l, u;
     array<int> arr;
  
     do
     {
-        cout << "\t\t Menu" << endl;
+        cout << "\t\t~MENU~" << endl;
         cout << "----------" << endl;
-        cout << "1.create an array with user input" << endl;
-        cout << "2.insertion at beginning" << endl;
-        cout << "3.insertion at a specific position" << endl;
-        cout << "4.Insertion at end" << endl;
-        cout << "5.Deletion from beginning" << endl;
-        cout << "6.Deletion at specific position" << endl;
-        cout << "7.Deletion from end" << endl;
-        cout << "8.Display the array elements" << endl;
-        cout << "Enter your choice" << endl;
+        cout << "1.create an array with user input: " << endl;
+        cout << "2.insertion at beginning: " << endl;
+        cout << "3.insertion at a specific position: " << endl;
+        cout << "4.Insertion at end: " << endl;
+        cout << "5.Deletion from beginning: " << endl;
+        cout << "6.Deletion at specific position: " << endl;
+        cout << "7.Deletion from end: " << endl;
+        cout << "Enter your choice: " << endl;
         cin >> choice;
  
         switch (choice)
         {
             case 1:
-                cout << "Enter the lower bound" << endl;
+                cout << "Enter the lower bound: " << endl;
                 cin >> l;
-                arr.setLB(l);
-                cout << "enter the upper bound" << endl;
+                arr.setlb(l);
+                cout << "Enter the upper bound: " << endl;
                 cin >> u;
-                arr.setUB(u);
+                arr.setub(u);
                 arr.create();
                 break;
  
             case 2:
-                cout << "Enter the element" << endl;
-                cin >> ele;
-                arr.insert_at_beginning(ele);
+                cout << "Enter the element: " << endl;
+                cin >> element;
+                arr.insertatbeginning(element);
+                cout << arr; 
                 break;
  
             case 3:
-                cout << "enter the position(" << arr.getLB() << "--" << arr.getUB() << ")";
+                cout << "enter the position: " << "("<< arr.getlb() << "--" << arr.getub() << ")";
                 cin >> pos;
-                cout << "Enter the element" << endl;
-                cin >> ele;
-                arr.insert_at_position(pos, ele);
+                cout << "Enter the element: " << endl;
+                cin >> element;
+                arr.insertatposition(pos, element);
+                cout << arr; 
                 break;
  
             case 4:
                 cout << "Enter the element" << endl;
-                cin >> ele;
-                arr.insert_at_end(ele);
+                cin >> element;
+                arr.insertatend(element);
+                cout << arr; 
                 break;
  
             case 5:
-                arr.delete_at_beginning();
+                arr.deleteatbeginning();
+                cout << arr; 
                 break;
  
             case 6:
-                cout << "enter the position(" << arr.getLB() << "--" << arr.getUB() << ")";
+                cout << "enter the position: " << "("<< arr.getlb() << "--" << arr.getub() << ")";
                 cin >> pos;
-                arr.delete_at_position(pos);
+                arr.deleteatposition(pos);
                 cout << "element deleted" << endl;
+                cout << arr; 
                 break;
  
             case 7:
-                arr.delete_at_end();
+                arr.deleteatend();
+                cout << arr; 
                 break;
- 
-            case 8:
-                cout << arr;   // invokes the overloaded operator<<
-                break;
- 
+
             default:
-                cout << "Invalid entry" << endl;
+                cout << "The Entry is INVALID\nPlease try again" << endl;
         }
  
-        cout << "Do you want to continue(y/n)" << endl;
+        cout << "Press 'y' to continue and 'n to stop'..." << endl;
         cin >> repeat;
  
-    } while (repeat == 'y');
- 
+    } while (repeat == 'y'); 
     return 0;
 }
