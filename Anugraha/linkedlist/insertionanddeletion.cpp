@@ -1,174 +1,164 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+using namespace std;
 
-struct Node {
+class Node {
+public:
     int data;
-    struct Node* next;
+    Node* next;
+
+    // Constructor to initialize a node
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
 };
 
-void insertAtBeginning(struct Node** head, int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->next = *head;
-    *head = newNode;       
-    printf("Inserted %d at the beginning.\n", value);
-}
+class LinkedList {
+private:
+    Node* head;
 
-// 2. Insert at the End
-void insertAtEnd(struct Node** head, int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->next = NULL;
-
-    // If the list is empty, make the new node the head
-    if (*head == NULL) {
-        *head = newNode;
-        printf("Inserted %d at the end.\n", value);
-        return;
+public:
+    // Constructor to initialize an empty list
+    LinkedList() {
+        head = nullptr;
     }
 
-    struct Node* temp = *head;
-    while (temp->next != NULL) {
-        temp = temp->next; // Traverse to the last node
-    }
-    temp->next = newNode; // Link the last node to the new node
-    printf("Inserted %d at the end.\n", value);
-}
-
-// 3. Insert at a Specific Position (1-based index)
-void insertAtPosition(struct Node** head, int value, int position) {
-    if (position < 1) {
-        printf("Invalid position!\n");
-        return;
+    // 1. Insert at Beginning
+    void insert_at_beginning(int data) {
+        Node* new_node = new Node(data);
+        new_node->next = head;
+        head = new_node;
     }
 
-    if (position == 1) {
-        insertAtBeginning(head, value);
-        return;
+    // 2. Insert at End
+    void insert_at_end(int data) {
+        Node* new_node = new Node(data);
+        if (head == nullptr) {
+            head = new_node;
+            return;
+        }
+        Node* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->next = new_node;
     }
 
-    struct Node* temp = *head;
-    // Traverse to the node right before the desired position
-    for (int i = 1; temp != NULL && i < position - 1; i++) {
-        temp = temp->next;
+    // 3. Insert at Specific Position (0-indexed)
+    void insert_at_position(int pos, int data) {
+        if (pos == 0) {
+            insert_at_beginning(data);
+            return;
+        }
+        Node* new_node = new Node(data);
+        Node* current = head;
+        for (int i = 0; i < pos - 1; i++) {
+            if (current == nullptr) {
+                cout << "Position out of bounds\n";
+                delete new_node; // Prevent memory leak
+                return;
+            }
+            current = current->next;
+        }
+        if (current == nullptr) {
+            cout << "Position out of bounds\n";
+            delete new_node;
+            return;
+        }
+        new_node->next = current->next;
+        current->next = new_node;
     }
 
-    if (temp == NULL) {
-        printf("Position out of bounds!\n");
-        return;
+    // 4. Delete at Beginning
+    void delete_at_beginning() {
+        if (head == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+        Node* temp = head;       // Hold the node to delete
+        head = head->next;       // Move head forward
+        delete temp;             // Free memory
     }
 
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->next = temp->next; // Link new node to the next node
-    temp->next = newNode;       // Link previous node to new node
-    printf("Inserted %d at position %d.\n", value, position);
-}
-
-// --- DELETION OPERATIONS ---
-
-// 1. Delete from the Beginning
-void deleteFromBeginning(struct Node** head) {
-    if (*head == NULL) {
-        printf("List is empty! Nothing to delete.\n");
-        return;
+    // 5. Delete at End
+    void delete_at_end() {
+        if (head == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+        if (head->next == nullptr) {
+            delete head;
+            head = nullptr;
+            return;
+        }
+        Node* current = head;
+        while (current->next->next != nullptr) {
+            current = current->next;
+        }
+        delete current->next;    // Free memory of last node
+        current->next = nullptr;
     }
 
-    struct Node* temp = *head; // Keep track of the old head
-    *head = (*head)->next;     // Move head to the next node
-    free(temp);                // Free the memory of the old head
-    printf("Deleted node from the beginning.\n");
-}
-
-// 2. Delete from the End
-void deleteFromEnd(struct Node** head) {
-    if (*head == NULL) {
-        printf("List is empty! Nothing to delete.\n");
-        return;
+    // 6. Delete at Specific Position
+    void delete_at_position(int pos) {
+        if (head == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+        if (pos == 0) {
+            delete_at_beginning();
+            return;
+        }
+        Node* current = head;
+        for (int i = 0; i < pos - 1; i++) {
+            if (current == nullptr || current->next == nullptr) {
+                cout << "Position out of bounds\n";
+                return;
+            }
+            current = current->next;
+        }
+        if (current->next == nullptr) {
+            cout << "Position out of bounds\n";
+            return;
+        }
+        Node* temp = current->next;    // Node to be deleted
+        current->next = current->next->next; // Bypass it
+        delete temp;                   // Free memory
     }
 
-    // If there is only one node
-    if ((*head)->next == NULL) {
-        free(*head);
-        *head = NULL;
-        printf("Deleted the last remaining node.\n");
-        return;
+    // Helper function to print the list
+    void display() {
+        Node* current = head;
+        if (current == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+        while (current != nullptr) {
+            cout << current->data;
+            if (current->next != nullptr) cout << " -> ";
+            current = current->next;
+        }
+        cout << endl;
     }
+};
 
-    struct Node* temp = *head;
-    // Traverse to the second-to-last node
-    while (temp->next->next != NULL) {
-        temp = temp->next;
-    }
-
-    free(temp->next);   // Free the last node
-    temp->next = NULL;  // Set the second-to-last node's next to NULL
-    printf("Deleted node from the end.\n");
-}
-
-// 3. Delete from a Specific Position (1-based index)
-void deleteFromPosition(struct Node** head, int position) {
-    if (*head == NULL || position < 1) {
-        printf("Invalid operation or list is empty!\n");
-        return;
-    }
-
-    if (position == 1) {
-        deleteFromBeginning(head);
-        return;
-    }
-
-    struct Node* temp = *head;
-    // Traverse to the node right before the target node to delete
-    for (int i = 1; temp != NULL && i < position - 1; i++) {
-        temp = temp->next;
-    }
-
-    if (temp == NULL || temp->next == NULL) {
-        printf("Position out of bounds!\n");
-        return;
-    }
-
-    struct Node* targetNode = temp->next; // The node to be deleted
-    temp->next = targetNode->next;        // Skip over the target node
-    free(targetNode);                     // Free memory
-    printf("Deleted node at position %d.\n", position);
-}
-
-// Helper function to print the linked list
-void printList(struct Node* node) {
-    if (node == NULL) {
-        printf("List is empty.\n");
-        return;
-    }
-    printf("Linked List: ");
-    while (node != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
-    }
-    printf("NULL\n");
-}
-
-// Main function to demonstrate the operations
 int main() {
-    struct Node* head = NULL;
+    LinkedList llist;
 
-    // Test Insertions
-    insertAtBeginning(&head, 10);
-    insertAtBeginning(&head, 5);
-    insertAtEnd(&head, 20);
-    insertAtPosition(&head, 15, 3); // Inserts 15 at position 3
-    printList(head); // Expected: 5 -> 10 -> 15 -> 20 -> NULL
+    llist.insert_at_end(10);       // List: 10
+    llist.insert_at_end(30);       // List: 10 -> 30
+    llist.insert_at_beginning(5);  // List: 5 -> 10 -> 30
+    llist.insert_at_position(1, 7);// List: 5 -> 7 -> 10 -> 30
 
-    // Test Deletions
-    deleteFromBeginning(&head);
-    printList(head); // Expected: 10 -> 15 -> 20 -> NULL
+    cout << "Current List: ";
+    llist.display();               // Output: 5 -> 7 -> 10 -> 30
 
-    deleteFromEnd(&head);
-    printList(head); // Expected: 10 -> 15 -> NULL
+    llist.delete_at_beginning();   // Removes 5
+    llist.delete_at_end();         // Removes 30
+    //llist.delete_at_position(1);   // Removes 10 (at index 1)
 
-    deleteFromPosition(&head, 2);
-    printList(head); // Expected: 10 -> NULL
+    cout << "After Deletions: ";
+    llist.display();               // Output: 7
 
     return 0;
 }
