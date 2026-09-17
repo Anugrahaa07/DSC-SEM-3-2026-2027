@@ -21,10 +21,10 @@ int main(){
     for(int i=pos;i<ub;i++){
         a[i]=a[i+1];
     }
-    ub=ub-1;
     for(int i=lb;i<ub;i++){
         cout<<a[i]<<" ";
     }
+    ub=ub-1;
     return 0;
 }
     
