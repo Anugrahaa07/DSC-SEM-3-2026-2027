@@ -20,7 +20,7 @@ for n in range(1, 5):
     arr = create_array(n)
 
     start_time = time.time()
-
+    
     bubble_sort(arr)
 
     end_time = time.time()
