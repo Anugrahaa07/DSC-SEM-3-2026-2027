@@ -37,19 +37,19 @@ int priority(char x)
 {
     if (x == '^')
         return 3;
-
     if (x == '*' || x == '/')
         return 2;
-
     return 1;
 }
 
 int main()
 {
-    string infix = "k+l-m*n+(o^p)*w/u/v*t+q";
-    string postfix = "";
+    string infix, postfix = "";
 
-    Stack s;
+    cout << "Enter infix expression: ";
+    cin >> infix;
+
+    Stack exp;
 
     for (char x : infix)
     {
@@ -57,30 +57,28 @@ int main()
             postfix += x;
 
         else if (x == '(')
-            s.push(x);
+            exp.push(x);
 
         else if (x == ')')
         {
-            while (s.peek() != '(')
-                postfix += s.pop();
+            while (exp.peek() != '(')
+                postfix += exp.pop();
 
-            s.pop();
+            exp.pop();
         }
 
         else
         {
-            while (!s.empty() &&
-                   priority(s.peek()) >= priority(x))
-            {
-                postfix += s.pop();
-            }
+            while (!exp.empty() &&
+                   priority(exp.peek()) >= priority(x))
+                postfix += exp.pop();
 
-            s.push(x);
+            exp.push(x);
         }
     }
 
-    while (!s.empty())
-        postfix += s.pop();
+    while (!exp.empty())
+        postfix += exp.pop();
 
     cout << "Postfix = " << postfix;
 
