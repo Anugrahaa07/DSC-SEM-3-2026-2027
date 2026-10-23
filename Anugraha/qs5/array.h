@@ -1,13 +1,14 @@
-#include<iostream>
+#include <iostream>
 #include <conio.h>
 using namespace std;
 
+template <typename T>
 class CircularLinkedList
 {
 private:
     struct node
     {
-        int data;
+        T data;
         node *link;
     } *tail;
 
@@ -16,20 +17,21 @@ public:
     void create();
     void display();
     int length();
-    void insertBeg(int item);
-    void insertEnd(int item);
-    void insertAtPos(int item, int pos);
+    void insertBeg(T item);
+    void insertEnd(T item);
+    void insertAtPos(T item, int pos);
     void deleteBeg();
     void deleteEnd();
     void deleteAtPos(int pos);
 };
 
+template <typename T>
 class DoublyLinkedList
 {
 private:
     struct node
     {
-        int data;
+        T data;
         node *prev;
         node *next;
     } *head;
@@ -38,9 +40,9 @@ public:
     DoublyLinkedList();
     void create();
     void display();
-    void insertBeg(int item);
-    void insertEnd(int item);
-    void insertAtPos(int item, int pos);
+    void insertBeg(T item);
+    void insertEnd(T item);
+    void insertAtPos(T item, int pos);
     void deleteBeg();
     void deleteEnd();
     void deleteAtPos(int pos);

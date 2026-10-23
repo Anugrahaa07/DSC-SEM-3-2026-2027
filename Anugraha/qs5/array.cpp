@@ -1,14 +1,16 @@
 #include "array.h"
 
-// --- Circular Linked List Functions ---
-CircularLinkedList::CircularLinkedList()
+// --- Circular Linked List Template Implementation ---
+template <typename T>
+CircularLinkedList<T>::CircularLinkedList()
 {
     tail = NULL;
 }
 
-void CircularLinkedList::create()
+template <typename T>
+void CircularLinkedList<T>::create()
 {
-    int num;
+    T num;
     char ch;
     do
     {
@@ -32,7 +34,8 @@ void CircularLinkedList::create()
     } while (ch == 'y' || ch == 'Y');
 }
 
-void CircularLinkedList::display()
+template <typename T>
+void CircularLinkedList<T>::display()
 {
     if (tail == NULL)
     {
@@ -49,7 +52,8 @@ void CircularLinkedList::display()
     cout << temp->data << endl;
 }
 
-int CircularLinkedList::length()
+template <typename T>
+int CircularLinkedList<T>::length()
 {
     if (tail == NULL) return 0;
     int count = 1;
@@ -62,7 +66,8 @@ int CircularLinkedList::length()
     return count;
 }
 
-void CircularLinkedList::insertBeg(int item)
+template <typename T>
+void CircularLinkedList<T>::insertBeg(T item)
 {
     node *newnode = new node;
     newnode->data = item;
@@ -78,7 +83,8 @@ void CircularLinkedList::insertBeg(int item)
     }
 }
 
-void CircularLinkedList::insertEnd(int item)
+template <typename T>
+void CircularLinkedList<T>::insertEnd(T item)
 {
     node *newnode = new node;
     newnode->data = item;
@@ -95,7 +101,8 @@ void CircularLinkedList::insertEnd(int item)
     }
 }
 
-void CircularLinkedList::insertAtPos(int item, int pos)
+template <typename T>
+void CircularLinkedList<T>::insertAtPos(T item, int pos)
 {
     int len = length();
     if (pos < 1 || pos > len + 1)
@@ -116,7 +123,8 @@ void CircularLinkedList::insertAtPos(int item, int pos)
     }
 }
 
-void CircularLinkedList::deleteBeg()
+template <typename T>
+void CircularLinkedList<T>::deleteBeg()
 {
     if (tail == NULL)
     {
@@ -136,7 +144,8 @@ void CircularLinkedList::deleteBeg()
     }
 }
 
-void CircularLinkedList::deleteEnd()
+template <typename T>
+void CircularLinkedList<T>::deleteEnd()
 {
     if (tail == NULL)
     {
@@ -163,7 +172,8 @@ void CircularLinkedList::deleteEnd()
     }
 }
 
-void CircularLinkedList::deleteAtPos(int pos)
+template <typename T>
+void CircularLinkedList<T>::deleteAtPos(int pos)
 {
     int len = length();
     if (pos < 1 || pos > len)
@@ -184,15 +194,17 @@ void CircularLinkedList::deleteAtPos(int pos)
 }
 
 
-// --- Doubly Linked List Functions ---
-DoublyLinkedList::DoublyLinkedList()
+// --- Doubly Linked List Template Implementation ---
+template <typename T>
+DoublyLinkedList<T>::DoublyLinkedList()
 {
     head = NULL;
 }
 
-void DoublyLinkedList::create()
+template <typename T>
+void DoublyLinkedList<T>::create()
 {
-    int num;
+    T num;
     char ch;
     do
     {
@@ -215,7 +227,8 @@ void DoublyLinkedList::create()
     } while (ch == 'y' || ch == 'Y');
 }
 
-void DoublyLinkedList::display()
+template <typename T>
+void DoublyLinkedList<T>::display()
 {
     if (head == NULL)
     {
@@ -232,7 +245,8 @@ void DoublyLinkedList::display()
     cout << "NULL" << endl;
 }
 
-void DoublyLinkedList::insertBeg(int item)
+template <typename T>
+void DoublyLinkedList<T>::insertBeg(T item)
 {
     node *newnode = new node;
     newnode->data = item;
@@ -247,7 +261,8 @@ void DoublyLinkedList::insertBeg(int item)
     }
 }
 
-void DoublyLinkedList::insertEnd(int item)
+template <typename T>
+void DoublyLinkedList<T>::insertEnd(T item)
 {
     node *newnode = new node;
     newnode->data = item;
@@ -263,7 +278,8 @@ void DoublyLinkedList::insertEnd(int item)
     }
 }
 
-void DoublyLinkedList::insertAtPos(int item, int pos)
+template <typename T>
+void DoublyLinkedList<T>::insertAtPos(T item, int pos)
 {
     if (pos == 1) { insertBeg(item); return; }
     node *newnode = new node;
@@ -285,7 +301,8 @@ void DoublyLinkedList::insertAtPos(int item, int pos)
     }
 }
 
-void DoublyLinkedList::deleteBeg()
+template <typename T>
+void DoublyLinkedList<T>::deleteBeg()
 {
     if (head == NULL)
     {
@@ -298,7 +315,8 @@ void DoublyLinkedList::deleteBeg()
     delete temp;
 }
 
-void DoublyLinkedList::deleteEnd()
+template <typename T>
+void DoublyLinkedList<T>::deleteEnd()
 {
     if (head == NULL)
     {
@@ -317,7 +335,8 @@ void DoublyLinkedList::deleteEnd()
     delete temp;
 }
 
-void DoublyLinkedList::deleteAtPos(int pos)
+template <typename T>
+void DoublyLinkedList<T>::deleteAtPos(int pos)
 {
     if (pos == 1) { deleteBeg(); return; }
     node *temp = head;
@@ -332,3 +351,7 @@ void DoublyLinkedList::deleteAtPos(int pos)
     if (temp->prev != NULL) temp->prev->next = temp->next;
     delete temp;
 }
+
+// Explicit instantiation for integer type
+template class CircularLinkedList<int>;
+template class DoublyLinkedList<int>;
