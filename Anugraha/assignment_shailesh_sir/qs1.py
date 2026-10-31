@@ -16,7 +16,7 @@ def create_array(n):
 sizes = []
 times = []
 
-for n in range(1, 5):
+for n in range(1, 100):
     arr = create_array(n)
 
     start_time = time.time()
